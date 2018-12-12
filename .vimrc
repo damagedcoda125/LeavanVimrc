@@ -3,7 +3,7 @@ set number
 nnoremap j gj
 nnoremap k gk
 inoremap jk <esc>
-inoremap {<cr> {}<esc>i<cr><esc>O
+inoremap JK <esc>
 set background=dark
 set ignorecase
 set tabstop=4
@@ -15,9 +15,11 @@ set termencoding=utf-8
 set fileencoding=chinese
 set fileencodings=ucs-bom,utf-8,chinese
 set hls
-set mouse=a
 set guioptions-=r
 set guioptions-=L
+set nobackup
+set noswapfile
+set backspace=indent,eol,start
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif 
@@ -30,21 +32,47 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
+" Enhancement
+Plug 'Raimondi/delimitMate'
+
+" C++
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'w0rp/ale'
-" Plug 'Shougo/echodoc' "useless
 Plug 'mhinz/vim-signify'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'Valloric/YouCompleteMe'
+
+" UI
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Yggdroot/indentLine'
+Plug 'ryanoasis/vim-devicons'
+
 Plug 'Yggdroot/LeaderF'
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
-" configuration for Shougo/echodoc
-" set cmdheight=2
-" configuration for vim-signify
-" let g:signify_sign_change = '!'
+" configuration for Raimondi/delimitMate
+let delimitMate_expand_cr=1
+let delimitMate_expand_space=1
+let delimitMate_expand_jump=1
+
+" configuration for vim-airline/vim-airline
+let g:airline_theme='angr'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_section_b = '%{strftime("%c")}'
+let g:airline_section_y = 'BN :{bufnr{"%"}}'
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+let g:airline_detect_crypt=1
+let g:airline_detect_spell=1
+let g:airline_powerline_fonts=1
+
+" configuration for Yggdroot/indentLine
+let g:indentLine_char = ''
+let g:indentLine_leadingSpaceEnabled=1
+let g:indentLine_leadingSpaceChar='.'
 
 " configuration for ludovicchabant/vim-gutentags
 set tags=./.tags;,.tags
@@ -70,8 +98,6 @@ noremap <C-n> :NERDTreeToggle<CR>
 " configuration for Yggdroot/LeaderF
 noremap <C-m> :LeaderfMru<cr>
 noremap <C-f> :LeaderfFunction<cr>
-noremap <C-b> :LeaderfBuffer<cr>
-noremap <C-p> :LeaderfTag<cr>
 let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
@@ -83,7 +109,6 @@ let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 " configuration for w0rp/ale
-" let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
 let g:ale_echo_delay = 20
 let g:ale_lint_delay = 500
@@ -92,7 +117,7 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
 let g:ale_c_cppcheck_options = ''
 let g:ale_cpp_cppcheck_options = ''
 hi! clear SpellBad
@@ -111,9 +136,9 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
 set completeopt=menu,menuone
- 
+
 noremap <c-z> <NOP>
- 
+
 let g:ycm_semantic_triggers =  {
             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
             \ 'cs,lua,javascript': ['re!\w{2}'],
