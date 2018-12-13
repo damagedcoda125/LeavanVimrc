@@ -71,8 +71,8 @@ let g:airline_detect_spell=1
 
 " configuration for Yggdroot/indentLine
 let g:indentLine_char = ''
-let g:indentLine_leadingSpaceEnabled=1
-let g:indentLine_leadingSpaceChar='.'
+" let g:indentLine_leadingSpaceEnabled=1
+" let g:indentLine_leadingSpaceChar='.'
 
 " configuration for ludovicchabant/vim-gutentags
 set tags=./.tags;,.tags
