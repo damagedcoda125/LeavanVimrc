@@ -2,6 +2,10 @@
 set number
 nnoremap j gj
 nnoremap k gk
+nnoremap <tab> :bn<cr>
+nnoremap L :bn<cr>
+nnoremap H :bp<cr>
+nnoremap Q :bd!<cr>
 inoremap jk <esc>
 inoremap JK <esc>
 set background=dark
@@ -34,6 +38,7 @@ endif
 call plug#begin()
 " Enhancement
 Plug 'Raimondi/delimitMate'
+" Plug 'yuttie/comfortable-motion.vim'
 
 " C++
 Plug 'ludovicchabant/vim-gutentags'
@@ -53,6 +58,10 @@ Plug 'Yggdroot/LeaderF'
 Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
+" configuration for yuttie/comfortablemotion
+" let g:comfortable_motion_scroll_down_key = "j"
+" let g:comfortable_motion_scroll_up_key = "k"
+
 " configuration for Raimondi/delimitMate
 let delimitMate_expand_cr=1
 let delimitMate_expand_space=1
@@ -70,9 +79,9 @@ let g:airline_detect_spell=1
 let g:airline_powerline_fonts=1
 
 " configuration for Yggdroot/indentLine
-let g:indentLine_char = ''
-let g:indentLine_leadingSpaceEnabled=1
-let g:indentLine_leadingSpaceChar='.'
+" let g:indentLine_char = ''
+ let g:indentLine_leadingSpaceEnabled=1
+" let g:indentLine_leadingSpaceChar='.'
 
 " configuration for ludovicchabant/vim-gutentags
 set tags=./.tags;,.tags
